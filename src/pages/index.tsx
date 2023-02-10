@@ -1,10 +1,10 @@
 import { type NextPage } from "next";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, type SubmitHandler } from "react-hook-form";
 import { useState } from "react";
 import Head from "next/head";
 
 import { api } from "@/utils/api";
-import { CityForm } from "@/types";
+import type {CityForm } from "@/types";
 
 const Home: NextPage = () => {
   const [cityName, setCityName] = useState<string>("");
@@ -33,7 +33,10 @@ const Home: NextPage = () => {
     <>
       <Head>
         <title>Adhan App</title>
-        <meta name="description" content="Adhan app created using create-t3-app" />
+        <meta
+          name="description"
+          content="Adhan app created using create-t3-app"
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c]">
@@ -50,7 +53,7 @@ const Home: NextPage = () => {
             />
             <button
               onClick={handleSubmit(onSubmit)}
-              className="rounded-full border-2 border-purple-400 p-4 text-white hover:bg-purple-500 w-3/4"
+              className="w-3/4 rounded-full border-2 border-purple-400 p-4 text-white hover:bg-purple-500"
             >
               Search
             </button>

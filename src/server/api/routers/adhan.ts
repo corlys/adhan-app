@@ -3,7 +3,7 @@ import axios from "axios";
 
 import { createTRPCRouter, publicProcedure } from "../trpc";
 import { env } from "@/env.mjs";
-import { CityApi, AdhanAPIResponse } from "@/types";
+import type { CityApi, AdhanAPIResponse } from "@/types";
 
 export const adhanRouter = createTRPCRouter({
   getAdhanByCity: publicProcedure
