@@ -4,7 +4,7 @@ import { useState } from "react";
 import Head from "next/head";
 
 import { api } from "@/utils/api";
-import type {CityForm } from "@/types";
+import type { CityForm } from "@/types";
 
 const Home: NextPage = () => {
   const [cityName, setCityName] = useState<string>("");
@@ -16,11 +16,10 @@ const Home: NextPage = () => {
   });
 
   const onSubmit: SubmitHandler<CityForm> = (data) => {
-    console.log(data);
     setCityName(data.city);
   };
 
-  const timings = api.adhan.getAdhanByCity.useQuery(
+  const { data, isInitialLoading } = api.adhan.getAdhanByCity.useQuery(
     {
       city: cityName,
     },
@@ -58,9 +57,21 @@ const Home: NextPage = () => {
               Search
             </button>
           </div>
-          <div className="grid gap-4 md:grid-cols-3">
-            {timings.data &&
-              timings.data.prayerTimes.map((i) => {
+          {isInitialLoading && (
+            <div className="flex items-center justify-center">
+              <div className="grid w-full animate-pulse gap-4 md:grid-cols-3">
+                <div className="flex h-32 w-32 items-center justify-center rounded bg-blue-400 dark:bg-blue-400"></div>
+                <div className="flex h-32 w-32 items-center justify-center rounded bg-blue-400 dark:bg-blue-400"></div>
+                <div className="flex h-32 w-32 items-center justify-center rounded bg-blue-400 dark:bg-blue-400"></div>
+                <div className="flex h-32 w-32 items-center justify-center rounded bg-blue-400 dark:bg-blue-400"></div>
+                <div className="flex h-32 w-32 items-center justify-center rounded bg-blue-400 dark:bg-blue-400"></div>
+                <div className="flex h-32 w-32 items-center justify-center rounded bg-blue-400 dark:bg-blue-400"></div>
+              </div>
+            </div>
+          )}
+          {data && (
+            <div className="grid gap-4 md:grid-cols-3">
+              {data.prayerTimes.map((i) => {
                 return (
                   <>
                     <div
@@ -75,7 +86,8 @@ const Home: NextPage = () => {
                   </>
                 );
               })}
-          </div>
+            </div>
+          )}
         </div>
       </main>
     </>
